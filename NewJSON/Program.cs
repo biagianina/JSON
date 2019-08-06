@@ -7,87 +7,95 @@ namespace NewJSON
         public static void Main()
         {
             string input = Console.ReadLine();
-            Console.WriteLine(CheckBackslash(input));
+            Console.WriteLine(JSONValidator(input));
+            Console.Read();
         }
 
-        public static bool CheckQuotationsStartAndEnd(string input)
+#pragma warning disable S1541 // Methods and properties should not be too complex
+        public static string JSONValidator(string input)
+#pragma warning restore S1541 // Methods and properties should not be too complex
         {
+            const string invalid = "Invalid";
             if (string.IsNullOrEmpty(input))
             {
-                return false;
+                return invalid;
             }
 
-            return input.StartsWith('"') && input.EndsWith('"');
-        }
-
-        public static bool CheckControlCharacters(string input)
-        {
-            if (string.IsNullOrEmpty(input))
+            if (!input.StartsWith('\"') || !input.EndsWith('\"'))
             {
-                return false;
+                return invalid;
             }
 
-            const int controlCharactersLimit = 32;
-            foreach (char c in input)
+            for (int i = 1; i < input.Length - 1; i++)
             {
-                if (c < controlCharactersLimit)
+                if (input[i - 1] != '\\' && input[i] == '/' || input[i - 1] != '\\' && input[i] == '"')
                 {
-                    return false;
+                    return invalid;
+                }
+
+                const int charactersLimit = 32;
+                if (input[i] < charactersLimit)
+                {
+                    return invalid;
+                }
+
+                if (input[i] == '\\' && !CheckBackslash(input.Substring(input.IndexOf('\\') + 1)))
+                {
+                     return invalid;
                 }
             }
 
-            return true;
+            return "Valid";
         }
 
-        public static bool CheckQuotations(string input)
-        {
-            if (string.IsNullOrEmpty(input))
+        private static bool CheckBackslash(string substring)
             {
-                return false;
-            }
-
-            return (!input.Contains('"') || input.IndexOf('"') == 0) && input.IndexOf('"') == input.Length - 1;
-        }
-
-        public static bool CheckBackslash(string input)
-        {
-            if (string.IsNullOrEmpty(input))
-            {
-                return false;
-            }
-
-            return input.Contains('\\');
-        }
-
-        public static bool CheckBackslashPreceededCharacters(string input)
-        {
-            if (string.IsNullOrEmpty(input))
-            {
-                return false;
-            }
-#pragma warning disable S1067 // Expressions should not be too complex
-            if (input.Contains('/') ||
-               input.Contains('\b') ||
-                input.Contains('\f') ||
-                input.Contains('\n') ||
-                input.Contains('\r') ||
-                input.Contains('\t'))
-#pragma warning restore S1067 // Expressions should not be too complex
+            if (CheckBackslashNextCharacter(substring[0]))
             {
                 return true;
+            }
+
+            if (substring[1] != 'u')
+            {
+                return false;
+            }
+
+            const int unicodeLength = 5;
+            const int start = 2;
+            return CheckUnicode(substring.Substring(start, unicodeLength));
+        }
+
+        private static bool CheckBackslashNextCharacter(char nextCharacter)
+        {
+            char[] validCharacters = { 'b', 'f', 'n', 'r', 't', '"', '/' };
+            for (int i = 0; i < validCharacters.Length; i++)
+            {
+                if (nextCharacter == validCharacters[i])
+                {
+                    return true;
+                }
             }
 
             return false;
         }
 
-        public static bool CheckUnicodeCharacters(string input)
+        private static bool CheckUnicode(string unicode)
         {
-            if (string.IsNullOrEmpty(input))
+            const int A = 65;
+            const int F = 70;
+            const int a = 97;
+            const int f = 102;
+            foreach (char c in unicode)
             {
-                return false;
+#pragma warning disable S1067 // Expressions should not be too complex
+                if ((c >= A && c <= F) || (c >= a && c <= f) || char.IsDigit(c))
+#pragma warning restore S1067 // Expressions should not be too complex
+                {
+                    return true;
+                }
             }
 
-            if (input.Contains("\\u")
+            return false;
         }
     }
 }
