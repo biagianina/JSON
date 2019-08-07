@@ -20,7 +20,7 @@ namespace NewJSON.Tests
         [Fact]
         public void StringOnlyStartsWithQuotations()
         {
-            Assert.Equal("Invlid", Program.JSONValidator("\"Test"));
+            Assert.Equal("Invalid", Program.JSONValidator("\"Test"));
         }
     }
 }

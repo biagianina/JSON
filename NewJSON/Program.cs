@@ -18,6 +18,11 @@ namespace NewJSON
                 return "Invalid";
             }
 
+            if (!input.EndsWith('"'))
+            {
+                return "Invalid";
+            }
+
             return "Valid";
         }
     }
