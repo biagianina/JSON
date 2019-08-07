@@ -10,5 +10,11 @@ namespace NewJSON.Tests
         {
             Assert.Equal("Invalid", Program.JSONValidator(""));
         }
+
+        [Fact]
+        public void StringStartsAndEndsWithQuotations()
+        {
+            Assert.Equal("Valid", Program.JSONValidator("\"Test\""));
+        }
     }
 }
