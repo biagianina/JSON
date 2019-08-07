@@ -13,14 +13,28 @@ namespace NewJSON
 
         public static string JSONValidator(string input)
         {
+            const string invalid = "Invalid";
             if (string.IsNullOrEmpty(input))
             {
-                return "Invalid";
+                return invalid;
             }
 
             if (!input.EndsWith('"') || !input.StartsWith('"'))
             {
-                return "Invalid";
+                return invalid;
+            }
+
+            for (int i = 1; i < input.Length - 1; i++)
+            {
+                if (char.IsControl(input, i))
+                {
+                    return invalid;
+                }
+
+                if (input[i] == '"' || input[i] == '/' && input[i - 1] != '\\')
+                {
+                    return invalid;
+                }
             }
 
             return "Valid";

@@ -22,5 +22,17 @@ namespace NewJSON.Tests
         {
             Assert.Equal("Invalid", Program.JSONValidator("\"Test"));
         }
+
+        [Fact]
+        public void StringContainsQuotationsWithoutEscapeCharacter()
+        {
+            Assert.Equal("Invalid", Program.JSONValidator("\"Te\"st\""));
+        }
+
+        [Fact]
+        public void StringContainsSlashWithoutEscapeCharacter()
+        {
+            Assert.Equal("Invalid", Program.JSONValidator("\"Te\\//st\""));
+        }
     }
 }
