@@ -16,5 +16,11 @@ namespace NewJSON.Tests
         {
             Assert.Equal("Valid", Program.JSONValidator("\"Test\""));
         }
+
+        [Fact]
+        public void StringOnlyStartsWithQuotations()
+        {
+            Assert.Equal("Invlid", Program.JSONValidator("\"Test"));
+        }
     }
 }
