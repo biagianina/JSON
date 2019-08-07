@@ -32,7 +32,37 @@ namespace NewJSON.Tests
         [Fact]
         public void StringContainsSlashWithoutEscapeCharacter()
         {
-            Assert.Equal("Invalid", Program.JSONValidator("\"Te\\//st\""));
+            Assert.Equal("Invalid", Program.JSONValidator("\"Te//st\""));
+        }
+
+        [Fact]
+        public void StringContainsSlashWithEscapeCharacter()
+        {
+            Assert.Equal("Valid", Program.JSONValidator("\"Te\\//st\""));
+        }
+
+        [Fact]
+        public void StringContainsQuotqationWithEscapeCharacter()
+        {
+            Assert.Equal("Valid", Program.JSONValidator("\"Te\\\"st\""));
+        }
+
+        [Fact]
+        public void StringContainsBackslashWithEscapeCharacter()
+        {
+            Assert.Equal("Valid", Program.JSONValidator("\"Te\\\\st\""));
+        }
+
+        [Fact]
+        public void StringContainsBackslashWithoutEscapeCharacter()
+        {
+            Assert.Equal("Invalid", Program.JSONValidator("\"Te\\st\""));
+        }
+
+        [Fact]
+        public void StringContainsBWithEscapeCharacter()
+        {
+            Assert.Equal("Valid", Program.JSONValidator("\"Te\\bst\""));
         }
     }
 }
