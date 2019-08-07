@@ -18,7 +18,7 @@ namespace NewJSON
                 return "Invalid";
             }
 
-            if (!input.EndsWith('"'))
+            if (!input.EndsWith('"') || !input.StartsWith('"'))
             {
                 return "Invalid";
             }
