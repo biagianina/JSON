@@ -14,6 +14,7 @@ namespace NewJSON
         public static string JSONValidator(string input)
         {
             const string invalid = "Invalid";
+            const int two = 2;
             if (string.IsNullOrEmpty(input))
             {
                 return invalid;
@@ -24,20 +25,27 @@ namespace NewJSON
                 return invalid;
             }
 
-            for (int i = 1; i < input.Length - 1; i++)
+            return AnalyzeContent(input.Substring(1, input.Length - two));
+        }
+
+        private static string AnalyzeContent(string content)
+        {
+            const string invalid = "Invalid";
+            const string valid = "Valid";
+            for (int i = 0; i < content.Length; i++)
             {
-                if (char.IsControl(input, i))
+                if (char.IsControl(content, i))
                 {
                     return invalid;
                 }
 
-                if (input[i] == '"' || input[i] == '/')
+                if (content[i] == '"' || content[i] == '/')
                 {
-                    return input[i - 1] != '\\' ? invalid : "Valid";
+                    return content[i - 1] != '\\' ? invalid : valid;
                 }
             }
 
-            return "Valid";
+            return valid;
         }
 
         private static string EscapePreceededCharacters(string input)
