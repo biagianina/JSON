@@ -70,5 +70,11 @@ namespace NewJSON.Tests
         {
             Assert.Equal("Valid", Program.JSONValidator("\"Te\\fst\""));
         }
+
+        [Fact]
+        public void StringContainsNWithEscapeCharacter()
+        {
+            Assert.Equal("Valid", Program.JSONValidator("\"Te\\nst\""));
+        }
     }
 }
