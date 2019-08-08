@@ -31,14 +31,9 @@ namespace NewJSON
                     return invalid;
                 }
 
-                if (input[i] == '"' || input[i] == '/' && input[i - 1] != '\\')
+                if (input[i] == '"' || input[i] == '/')
                 {
-                    return invalid;
-                }
-
-                if (input[i] == '\\')
-                {
-                    return EscapePreceededCharacters(input.Substring(1, input.Length - 1));
+                    return input[i - 1] != '\\' ? invalid : "Valid";
                 }
             }
 
@@ -47,14 +42,14 @@ namespace NewJSON
 
         private static string EscapePreceededCharacters(string input)
         {
-            char[] validCharacters = { '"', '\\', '/', 'b', 'f', 'n', 'r', 't' };
+            char[] validCharacters = { 'b', 'f', 'n', 'r', 't' };
             for (int i = 0; i < input.Length; i++)
             {
                 for (int j = 0; j < validCharacters.Length; j++)
                 {
                     if (input[i] == '\\' && input[i + 1] == validCharacters[j])
                     {
-                            return "Valid";
+                       return "Valid";
                     }
                 }
             }

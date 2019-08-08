@@ -42,7 +42,7 @@ namespace NewJSON.Tests
         }
 
         [Fact]
-        public void StringContainsQuotqationWithEscapeCharacter()
+        public void StringContainsQuotationWithEscapeCharacter()
         {
             Assert.Equal("Valid", Program.JSONValidator("\"Te\\\"st\""));
         }
