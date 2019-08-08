@@ -45,24 +45,27 @@ namespace NewJSON
                 }
             }
 
+            if (content.Contains('\\'))
+            {
+                return CheckEscapeCharacters(content);
+            }
+
             return valid;
         }
 
-        private static string EscapePreceededCharacters(string input)
+        private static string CheckEscapeCharacters(string content)
         {
-            char[] validCharacters = { 'b', 'f', 'n', 'r', 't' };
-            for (int i = 0; i < input.Length; i++)
+            char[] validCharacters = { 'b', 'f', 'n', 'r', 't', '\\', '/', '"' };
+            bool foundValidCharacter = false;
+            for (int i = 0; i < validCharacters.Length; i++)
             {
-                for (int j = 0; j < validCharacters.Length; j++)
+                if (validCharacters[i] == content[content.IndexOf('\\') + 1])
                 {
-                    if (input[i] == '\\' && input[i + 1] == validCharacters[j])
-                    {
-                       return "Valid";
-                    }
+                    foundValidCharacter = true;
                 }
             }
 
-            return "Invalid";
+            return foundValidCharacter ? "Valid" : "Invalid";
         }
     }
 }
