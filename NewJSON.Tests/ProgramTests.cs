@@ -88,5 +88,11 @@ namespace NewJSON.Tests
         {
             Assert.Equal("Valid", Program.JSONValidator("\"Te\\\\u0097st\""));
         }
+
+        [Fact]
+        public void StringContainsUnicodeWithDigitsAndLettersWithEscapeCharacter()
+        {
+            Assert.Equal("Valid", Program.JSONValidator("\"Te\\\\u0Bf7st\""));
+        }
     }
 }
