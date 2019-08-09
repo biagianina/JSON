@@ -106,5 +106,11 @@ namespace NewJSON.Tests
         {
             Assert.Equal("Invalid", Program.JSONValidator("\"Test\\n\\q\""));
         }
+
+        [Fact]
+        public void StringContainsThreeCorrectEscapeCharacters()
+        {
+            Assert.Equal("Valid", Program.JSONValidator("\"Test\\n\\/\\\\u09Aa\""));
+        }
     }
 }
