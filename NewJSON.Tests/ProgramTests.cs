@@ -112,5 +112,11 @@ namespace NewJSON.Tests
         {
             Assert.Equal("Valid", Program.JSONValidator("\"Test\\n\\/\\\\u09Aa\""));
         }
+
+        [Fact]
+        public void StringContainsTwoCorrectAndOneIncorrectEscapeCharacters()
+        {
+            Assert.Equal("Invalid", Program.JSONValidator("\"Test\\n/\\\\u09Aa\""));
+        }
     }
 }
