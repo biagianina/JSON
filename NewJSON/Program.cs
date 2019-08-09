@@ -43,11 +43,11 @@ namespace NewJSON
                 {
                     return content[i - 1] != '\\' ? Invalid : Valid;
                 }
-            }
 
-            if (content.Contains('\\'))
-            {
-                return CheckEscapeCharacters(content);
+                if (content[i] == '\\' && CheckEscapeCharacters(content.Substring(i - 1)) != Valid)
+                {
+                    return Invalid;
+                }
             }
 
             return Valid;
@@ -55,18 +55,18 @@ namespace NewJSON
 
         private static string CheckEscapeCharacters(string content)
         {
-            string[] validCharacters = { "\\b", "\\f", "\\n", "\\r", "\\t", "\\\\", "\\\\u" };
+            string[] validCharacters = { "\\b", "\\f", "\\n", "\\r", "\\t", "\\\\", "\\\\u", "\\\"", "\\/" };
             bool foundValidCharacter = false;
             for (int i = 0; i < validCharacters.Length; i++)
             {
                 if (content.Contains(validCharacters[i]))
                 {
                     foundValidCharacter = true;
-                }
 
-                if (foundValidCharacter && validCharacters[i] == "\\\\u")
-                {
-                    return CheckUnicode(content);
+                    if (validCharacters[i] == "\\\\u" && CheckUnicode(content) == Invalid)
+                    {
+                         foundValidCharacter = false;
+                    }
                 }
             }
 
