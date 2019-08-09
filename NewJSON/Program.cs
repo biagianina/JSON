@@ -55,21 +55,18 @@ namespace NewJSON
 
         private static string CheckEscapeCharacters(string content)
         {
-            char[] validCharacters = { 'b', 'f', 'n', 'r', 't', '\\', '/', '"' };
+            string[] validCharacters = { "\\b", "\\f", "\\n", "\\r", "\\t", "\\\\", "\\\\u" };
             bool foundValidCharacter = false;
-            if (content.IndexOf('\\') < content.Length - 1)
+            for (int i = 0; i < validCharacters.Length; i++)
             {
-                char escapeNextChar = content[content.IndexOf('\\') + 1];
-                for (int i = 0; i < validCharacters.Length; i++)
+                if (content.Contains(validCharacters[i]))
                 {
-                    if (escapeNextChar == '\\' && content[content.IndexOf(escapeNextChar) + 1] == 'u')
-                    {
-                        return CheckUnicode(content);
-                    }
-                    else if (validCharacters[i] == escapeNextChar)
-                    {
-                        foundValidCharacter = true;
-                    }
+                    foundValidCharacter = true;
+                }
+
+                if (foundValidCharacter && validCharacters[i] == "\\\\u")
+                {
+                    return CheckUnicode(content);
                 }
             }
 
