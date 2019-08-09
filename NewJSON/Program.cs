@@ -57,16 +57,18 @@ namespace NewJSON
         {
             char[] validCharacters = { 'b', 'f', 'n', 'r', 't', '\\', '/', '"' };
             bool foundValidCharacter = false;
-            char escapeNextChar = content[content.IndexOf('\\') + 1];
-            char unicodeChar = content[content.IndexOf('\\') + 2];
-            for (int i = 0; i < validCharacters.Length; i++)
+            if (content.IndexOf('\\') < content.Length - 1)
             {
-                if (validCharacters[i] == escapeNextChar)
+                char escapeNextChar = content[content.IndexOf('\\') + 1];
+                for (int i = 0; i < validCharacters.Length; i++)
                 {
-                    foundValidCharacter = true;
-                    if (escapeNextChar == '\\' && unicodeChar == 'u')
+                    if (escapeNextChar == '\\' && content[content.IndexOf(escapeNextChar) + 1] == 'u')
                     {
                         return CheckUnicode(content);
+                    }
+                    else if (validCharacters[i] == escapeNextChar)
+                    {
+                        foundValidCharacter = true;
                     }
                 }
             }
