@@ -77,7 +77,7 @@ namespace NewJSON
                     return true;
                 }
 
-                if (input.EndsWith(c) || input.StartsWith(c))
+                if (input.StartsWith(c) || input.EndsWith(c))
                 {
                     return false;
                 }

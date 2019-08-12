@@ -256,5 +256,17 @@ namespace NewJSON.Tests
         {
             Assert.Equal("Invalid", Program.ManualNumberValidator("12.123+3"));
         }
+
+        [Fact]
+        public void NumberStartingWithPointShouldReturnInvalid()
+        {
+            Assert.Equal("Invalid", Program.ManualNumberValidator(".123"));
+        }
+
+        [Fact]
+        public void NumberEndingWithPointShouldReturnInvalid()
+        {
+            Assert.Equal("Invalid", Program.ManualNumberValidator("123."));
+        }
     }
 }
