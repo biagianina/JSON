@@ -178,5 +178,11 @@ namespace NewJSON.Tests
         {
             Assert.Equal("Invalid", Program.JSONNumberValidator("12."));
         }
+
+        [Fact]
+        public void NumberInputEndsWithMinusShouldReturnInvalid()
+        {
+            Assert.Equal("Invalid", Program.JSONNumberValidator("12-"));
+        }
     }
 }
