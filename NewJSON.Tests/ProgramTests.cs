@@ -142,5 +142,11 @@ namespace NewJSON.Tests
         {
             Assert.Equal("Invalid", Program.JSONNumberValidator("012"));
         }
+
+        [Fact]
+        public void NumberInputStartsWithZeroAndIsSubunitaryShouldReturnValid()
+        {
+            Assert.Equal("Valid", Program.JSONNumberValidator("0.12"));
+        }
     }
 }
