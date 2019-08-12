@@ -184,5 +184,11 @@ namespace NewJSON.Tests
         {
             Assert.Equal("Invalid", Program.JSONNumberValidator("12-"));
         }
+
+        [Fact]
+        public void NumberInputIsFractionaryShouldReturnValid()
+        {
+            Assert.Equal("Valid", Program.JSONNumberValidator("12.34"));
+        }
     }
 }
