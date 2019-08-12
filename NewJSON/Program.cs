@@ -31,7 +31,7 @@ namespace NewJSON
                 return Invalid;
             }
 
-            if (!CheckCharacterOccurance(input) || !CheckExponentOccurance(input))
+            if (!ValidCharactersOccurOnce(input.Substring(1)) || !ExponentsOccurOnce(input))
             {
                 return Invalid;
             }
@@ -44,7 +44,7 @@ namespace NewJSON
             return Valid;
         }
 
-        public static bool CheckCharacterOccurance(string input)
+        public static bool ValidCharactersOccurOnce(string input)
         {
             if (string.IsNullOrEmpty(input))
             {
@@ -55,23 +55,32 @@ namespace NewJSON
             int counter = 0;
             foreach (char c in validCharacters)
             {
-               for (int i = 1; i < input.Length; i++)
-               {
-                    if (input[i] == c)
-                    {
-                        counter++;
-                    }
-               }
+               counter = CharacterOccurrance(input, c);
 
                if (counter > 1)
                {
                     return false;
                }
-
-               counter = 0;
             }
 
             return true;
+        }
+
+        public static int CharacterOccurrance(string input, char c)
+        {
+            int counter = 0;
+            if (!string.IsNullOrEmpty(input))
+            {
+                for (int i = 0; i < input.Length; i++)
+                {
+                    if (input[i] == c)
+                    {
+                        counter++;
+                    }
+                }
+            }
+
+            return counter;
         }
 
         public static bool IsNumber(string input)
@@ -93,7 +102,7 @@ namespace NewJSON
             return false;
         }
 
-        public static bool CheckExponentOccurance(string input)
+        public static bool ExponentsOccurOnce(string input)
         {
             if (string.IsNullOrEmpty(input))
             {
