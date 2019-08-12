@@ -118,5 +118,11 @@ namespace NewJSON.Tests
         {
             Assert.Equal("Invalid", Program.JSONValidator("\"Test\\n/\\\\u09Aa\""));
         }
+
+        [Fact]
+        public void NumberInputIsEmptyShouldReturnInvalid()
+        {
+            Assert.Equal("Invalid", Program.JSONNumberValidator(""));
+        }
     }
 }
