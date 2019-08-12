@@ -16,14 +16,15 @@ namespace NewJSON
 
         public static string ManualNumberValidator(string input)
         {
-            if (string.IsNullOrEmpty(input) || input.StartsWith('0'))
+            const string validCharacters = ".";
+            if (string.IsNullOrEmpty(input) || input.StartsWith('0') && input[1] != '.')
             {
                 return Invalid;
             }
 
             foreach (char c in input)
             {
-                if (!char.IsDigit(c))
+                if (!char.IsDigit(c) && !validCharacters.Contains(c))
                 {
                     return Invalid;
                 }
