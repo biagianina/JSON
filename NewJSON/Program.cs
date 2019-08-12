@@ -16,7 +16,7 @@ namespace NewJSON
 
         public static string ManualNumberValidator(string input)
         {
-            const string validCharacters = ".-e";
+            const string validCharacters = ".-eE";
             if (string.IsNullOrEmpty(input) || input.StartsWith('0') && input[1] != '.')
             {
                 return Invalid;

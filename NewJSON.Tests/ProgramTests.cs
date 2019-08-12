@@ -207,7 +207,7 @@ namespace NewJSON.Tests
         public void NumberInputShouldReturnValid()
         {
             Assert.Equal("Valid", Program.ManualNumberValidator("123"));
-        }
+       }
 
         [Fact]
         public void NumberInputContainsLettersShouldReturnInvalid()
@@ -237,6 +237,12 @@ namespace NewJSON.Tests
         public void NumberContainsExponenteShouldReturnValid()
         {
             Assert.Equal("Valid", Program.ManualNumberValidator("12.123e3"));
+        }
+
+        [Fact]
+        public void NumberContainsExponentOfEShouldReturnValid()
+        {
+            Assert.Equal("Valid", Program.ManualNumberValidator("12.123E3"));
         }
     }
 }
