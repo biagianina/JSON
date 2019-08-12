@@ -286,5 +286,17 @@ namespace NewJSON.Tests
         {
             Assert.Equal("Invalid", Program.ManualNumberValidator("E123"));
         }
+
+        [Fact]
+        public void NumberContainingTwoPointsReturnInvalid()
+        {
+            Assert.Equal("Invalid", Program.ManualNumberValidator("1.2.3"));
+        }
+
+        [Fact]
+        public void NumberContainingTwoPlusesAfterEReturnInvalid()
+        {
+            Assert.Equal("Invalid", Program.ManualNumberValidator("13E++1"));
+        }
     }
 }

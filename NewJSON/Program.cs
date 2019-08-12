@@ -31,9 +31,9 @@ namespace NewJSON
                 return Invalid;
             }
 
-            if (input.Contains('E') || input.Contains('e'))
+            if (!CheckCharacterOccurance(input) || !CheckExponentOccurance(input))
             {
-                return CheckExponentOccurance(input);
+                return Invalid;
             }
 
             if (input.Contains('+') || input.Contains('-'))
@@ -42,6 +42,36 @@ namespace NewJSON
             }
 
             return Valid;
+        }
+
+        public static bool CheckCharacterOccurance(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+            {
+                return false;
+            }
+
+            const string validCharacters = "+-.Ee";
+            int counter = 0;
+            foreach (char c in validCharacters)
+            {
+               for (int i = 0; i < input.Length; i++)
+               {
+                    if (input[i] == c)
+                    {
+                        counter++;
+                    }
+               }
+
+               if (counter > 1)
+               {
+                    return false;
+               }
+
+               counter = 0;
+            }
+
+            return true;
         }
 
         public static bool IsNumber(string input)
@@ -63,28 +93,19 @@ namespace NewJSON
             return false;
         }
 
-        public static string CheckExponentOccurance(string input)
+        public static bool CheckExponentOccurance(string input)
         {
             if (string.IsNullOrEmpty(input))
             {
-                return Invalid;
+                return false;
             }
 
-            int counter = 0;
-            for (int i = 0; i < input.Length; i++)
+            if (input.Contains('E') && input.Contains('e'))
             {
-                if (input[i] == 'E' || input[i] == 'e')
-                {
-                    counter++;
-                }
+                return false;
             }
 
-            if (counter != 1)
-            {
-                return Invalid;
-            }
-
-            return Valid;
+            return true;
         }
 
         public static bool CheckNegativeNumber(string input)
