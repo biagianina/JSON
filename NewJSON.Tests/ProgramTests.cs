@@ -280,5 +280,11 @@ namespace NewJSON.Tests
         {
             Assert.Equal("Invalid", Program.ManualNumberValidator("123Ee+1"));
         }
+
+        [Fact]
+        public void NumberStartingWithExponentsShouldReturnInvalid()
+        {
+            Assert.Equal("Invalid", Program.ManualNumberValidator("E123"));
+        }
     }
 }

@@ -21,17 +21,12 @@ namespace NewJSON
                 return Invalid;
             }
 
-            if (input.StartsWith('-'))
-            {
-                return CheckNegativeNumber(input);
-            }
-
-            if (input.StartsWith('0') && input[1] != '.')
+            if (!IsNumber(input))
             {
                 return Invalid;
             }
 
-            if (!char.IsDigit(input[input.Length - 1]))
+            if (input.StartsWith('0') && input[1] != '.')
             {
                 return Invalid;
             }
@@ -47,6 +42,25 @@ namespace NewJSON
             }
 
             return Valid;
+        }
+
+        public static bool IsNumber(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+            {
+                return false;
+            }
+
+            if (char.IsDigit(input[0]) && char.IsDigit(input[input.Length - 1]))
+            {
+                return true;
+            }
+            else if (input.StartsWith('-'))
+            {
+                return CheckNegativeNumber(input);
+            }
+
+            return false;
         }
 
         public static string CheckExponentOccurance(string input)
@@ -73,19 +87,14 @@ namespace NewJSON
             return Valid;
         }
 
-        public static string CheckNegativeNumber(string input)
+        public static bool CheckNegativeNumber(string input)
         {
             if (string.IsNullOrEmpty(input))
             {
-                return Invalid;
+                return false;
             }
 
-            if (char.IsDigit(input[1]))
-            {
-                return Valid;
-            }
-
-            return Invalid;
+            return char.IsDigit(input[1]);
         }
 
         public static string CheckExponent(string input)
