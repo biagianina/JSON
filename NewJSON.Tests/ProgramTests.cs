@@ -244,5 +244,11 @@ namespace NewJSON.Tests
         {
             Assert.Equal("Valid", Program.ManualNumberValidator("12.123E3"));
         }
+
+        [Fact]
+        public void NumberContainsExponentOfEFollowedByPlusShouldReturnValid()
+        {
+            Assert.Equal("Valid", Program.ManualNumberValidator("12.123E+3"));
+        }
     }
 }

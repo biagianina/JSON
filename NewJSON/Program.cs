@@ -16,21 +16,36 @@ namespace NewJSON
 
         public static string ManualNumberValidator(string input)
         {
-            const string validCharacters = ".-eE";
-            if (string.IsNullOrEmpty(input) || input.StartsWith('0') && input[1] != '.')
+            if (!CheckElements(input))
             {
                 return Invalid;
+            }
+
+            if (input.StartsWith('0') && input[1] != '.')
+            {
+                return Invalid;
+            }
+
+            return Valid;
+        }
+
+        public static bool CheckElements(string input)
+        {
+            const string validCharacters = ".-+eE";
+            if (string.IsNullOrEmpty(input))
+            {
+                return false;
             }
 
             foreach (char c in input)
             {
                 if (!char.IsDigit(c) && !validCharacters.Contains(c))
                 {
-                    return Invalid;
+                    return false;
                 }
             }
 
-            return Valid;
+            return true;
         }
 
         public static string JSONNumberValidator(string input)
