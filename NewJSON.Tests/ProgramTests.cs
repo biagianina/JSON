@@ -134,7 +134,7 @@ namespace NewJSON.Tests
         [Fact]
         public void NumberInputIsNumberShouldReturnValid()
         {
-            Assert.Equal("Valid", Program.JSONNumberValidator("12"));
+            Assert.Equal("Valid", Program.JSONNumberValidator("234"));
         }
 
         [Fact]
@@ -147,6 +147,12 @@ namespace NewJSON.Tests
         public void NumberInputStartsWithZeroAndIsSubunitaryShouldReturnValid()
         {
             Assert.Equal("Valid", Program.JSONNumberValidator("0.12"));
+        }
+
+        [Fact]
+        public void NumberInputStartsWithMinusShouldReturnValid()
+        {
+            Assert.Equal("Valid", Program.JSONNumberValidator("-123"));
         }
     }
 }
