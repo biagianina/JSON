@@ -21,6 +21,11 @@ namespace NewJSON
                 return Invalid;
             }
 
+            if (!double.TryParse(input, out double result))
+            {
+                return Invalid;
+            }
+
             return Valid;
         }
 
