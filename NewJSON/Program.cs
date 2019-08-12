@@ -55,7 +55,7 @@ namespace NewJSON
             int counter = 0;
             foreach (char c in validCharacters)
             {
-               for (int i = 0; i < input.Length; i++)
+               for (int i = 1; i < input.Length; i++)
                {
                     if (input[i] == c)
                     {

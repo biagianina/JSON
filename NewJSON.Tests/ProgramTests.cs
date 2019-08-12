@@ -298,5 +298,11 @@ namespace NewJSON.Tests
         {
             Assert.Equal("Invalid", Program.ManualNumberValidator("13E++1"));
         }
+
+        [Fact]
+        public void NegativeNumberWithNegativeExponentShouldReturnValid()
+        {
+            Assert.Equal("Valid", Program.ManualNumberValidator("-12.123E-3"));
+        }
     }
 }
