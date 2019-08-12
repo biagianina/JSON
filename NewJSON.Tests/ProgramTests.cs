@@ -232,5 +232,11 @@ namespace NewJSON.Tests
         {
             Assert.Equal("Valid", Program.ManualNumberValidator("-123"));
         }
+
+        [Fact]
+        public void NumberContainsExponenteShouldReturnValid()
+        {
+            Assert.Equal("Valid", Program.ManualNumberValidator("12.123e3"));
+        }
     }
 }
