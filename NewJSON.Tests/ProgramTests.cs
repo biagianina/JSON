@@ -168,7 +168,7 @@ namespace NewJSON.Tests
         }
 
         [Fact]
-        public void NumberInputEndsWithExponentsShouldReturnInvalid()
+        public void NumberInputEndsWithPositiveExponentShouldReturnInvalid()
         {
             Assert.Equal("Invalid", Program.JSONNumberValidator("12.123E"));
         }
@@ -189,6 +189,12 @@ namespace NewJSON.Tests
         public void NumberInputIsFractionaryShouldReturnValid()
         {
             Assert.Equal("Valid", Program.JSONNumberValidator("12.34"));
+        }
+
+        [Fact]
+        public void NumberInputWithNegativeExponentShouldReturnValid()
+        {
+            Assert.Equal("Valid", Program.JSONNumberValidator("12.123E-2"));
         }
     }
 }
