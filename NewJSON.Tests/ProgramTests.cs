@@ -214,5 +214,11 @@ namespace NewJSON.Tests
         {
             Assert.Equal("Invalid", Program.ManualNumberValidator("123A"));
         }
+
+        [Fact]
+        public void NumberInputStartingWithZeroShouldReturnInvalid()
+        {
+            Assert.Equal("Invalid", Program.ManualNumberValidator("012"));
+        }
     }
 }

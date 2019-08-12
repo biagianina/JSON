@@ -16,7 +16,7 @@ namespace NewJSON
 
         public static string ManualNumberValidator(string input)
         {
-            if (string.IsNullOrEmpty(input))
+            if (string.IsNullOrEmpty(input) || input.StartsWith('0'))
             {
                 return Invalid;
             }
