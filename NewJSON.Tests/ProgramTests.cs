@@ -226,5 +226,11 @@ namespace NewJSON.Tests
         {
             Assert.Equal("Valid", Program.ManualNumberValidator("0.12"));
         }
+
+        [Fact]
+        public void NumberInputIsNegativeShouldReturnValid()
+        {
+            Assert.Equal("Valid", Program.ManualNumberValidator("-123"));
+        }
     }
 }
