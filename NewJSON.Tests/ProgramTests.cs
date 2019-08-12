@@ -196,5 +196,11 @@ namespace NewJSON.Tests
         {
             Assert.Equal("Valid", Program.JSONNumberValidator("12.123E-2"));
         }
+
+        [Fact]
+        public void NumberInputEmptyShouldReturnValid()
+        {
+            Assert.Equal("Invalid", Program.ManualNumberValidator(""));
+        }
     }
 }

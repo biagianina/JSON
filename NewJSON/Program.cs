@@ -10,8 +10,18 @@ namespace NewJSON
         public static void Main()
         {
             string input = Console.ReadLine();
-            Console.WriteLine(JSONNumberValidator(input));
+            Console.WriteLine(ManualNumberValidator(input));
             Console.Read();
+        }
+
+        public static string ManualNumberValidator(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+            {
+                return Invalid;
+            }
+
+            return Valid;
         }
 
         public static string JSONNumberValidator(string input)
