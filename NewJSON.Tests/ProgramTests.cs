@@ -258,15 +258,9 @@ namespace NewJSON.Tests
         }
 
         [Fact]
-        public void NumberStartingWithPointShouldReturnInvalid()
+        public void NumberIsNegativeAndFollowedByPointShouldReturnInvalid()
         {
-            Assert.Equal("Invalid", Program.ManualNumberValidator(".123"));
-        }
-
-        [Fact]
-        public void NumberEndingWithPointShouldReturnInvalid()
-        {
-            Assert.Equal("Invalid", Program.ManualNumberValidator("123."));
+            Assert.Equal("Invalid", Program.ManualNumberValidator("-.123"));
         }
     }
 }

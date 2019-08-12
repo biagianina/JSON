@@ -21,6 +21,11 @@ namespace NewJSON
                 return Invalid;
             }
 
+            if (input.StartsWith('-'))
+            {
+                return CheckNegativeNumber(input);
+            }
+
             if (input.StartsWith('0') && input[1] != '.')
             {
                 return Invalid;
@@ -32,6 +37,21 @@ namespace NewJSON
             }
 
             return Valid;
+        }
+
+        public static string CheckNegativeNumber(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+            {
+                return Invalid;
+            }
+
+            if (char.IsDigit(input[1]))
+            {
+                return Valid;
+            }
+
+            return Invalid;
         }
 
         public static string CheckExponent(string input)
@@ -65,19 +85,6 @@ namespace NewJSON
             foreach (char c in input)
             {
                 if (!char.IsDigit(c) && !validCharacters.Contains(c))
-                {
-                    return false;
-                }
-            }
-
-            foreach (char c in validCharacters)
-            {
-                if (c == '-' && input.StartsWith(c))
-                {
-                    return true;
-                }
-
-                if (input.StartsWith(c) || input.EndsWith(c))
                 {
                     return false;
                 }
