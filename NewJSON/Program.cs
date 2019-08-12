@@ -36,9 +36,38 @@ namespace NewJSON
                 return Invalid;
             }
 
+            if (input.Contains('E') || input.Contains('e'))
+            {
+                return CheckExponentOccurance(input);
+            }
+
             if (input.Contains('+') || input.Contains('-'))
             {
                 return CheckExponent(input);
+            }
+
+            return Valid;
+        }
+
+        public static string CheckExponentOccurance(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+            {
+                return Invalid;
+            }
+
+            int counter = 0;
+            for (int i = 0; i < input.Length; i++)
+            {
+                if (input[i] == 'E' || input[i] == 'e')
+                {
+                    counter++;
+                }
+            }
+
+            if (counter != 1)
+            {
+                return Invalid;
             }
 
             return Valid;

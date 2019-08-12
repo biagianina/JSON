@@ -274,5 +274,11 @@ namespace NewJSON.Tests
         {
             Assert.Equal("Invalid", Program.ManualNumberValidator("123E"));
         }
+
+        [Fact]
+        public void NumberContainsMultipleExponentsShouldReturnInvalid()
+        {
+            Assert.Equal("Invalid", Program.ManualNumberValidator("123Ee+1"));
+        }
     }
 }
