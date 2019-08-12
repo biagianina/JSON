@@ -250,5 +250,11 @@ namespace NewJSON.Tests
         {
             Assert.Equal("Valid", Program.ManualNumberValidator("12.123E+3"));
         }
+
+        [Fact]
+        public void NumberContainPlusWithoutExponentShouldReturnInvalid()
+        {
+            Assert.Equal("Invalid", Program.ManualNumberValidator("12.123+3"));
+        }
     }
 }

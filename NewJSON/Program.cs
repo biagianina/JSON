@@ -26,6 +26,31 @@ namespace NewJSON
                 return Invalid;
             }
 
+            if (input.Contains('+') || input.Contains('-'))
+            {
+                return CheckExponent(input);
+            }
+
+            return Valid;
+        }
+
+        public static string CheckExponent(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+            {
+                return Invalid;
+            }
+
+            if (input.IndexOf('+') > 1 && input[input.IndexOf('+') - 1] != 'E' && input[input.IndexOf('+') - 1] != 'e')
+            {
+                   return Invalid;
+            }
+
+            if (input.IndexOf('-') > 1 && input[input.IndexOf('-') - 1] != 'E' && input[input.IndexOf('-') - 1] != 'e')
+            {
+                return Invalid;
+            }
+
             return Valid;
         }
 
@@ -40,6 +65,19 @@ namespace NewJSON
             foreach (char c in input)
             {
                 if (!char.IsDigit(c) && !validCharacters.Contains(c))
+                {
+                    return false;
+                }
+            }
+
+            foreach (char c in validCharacters)
+            {
+                if (c == '-' && input.StartsWith(c))
+                {
+                    return true;
+                }
+
+                if (input.EndsWith(c) || input.StartsWith(c))
                 {
                     return false;
                 }
