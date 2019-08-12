@@ -31,6 +31,11 @@ namespace NewJSON
                 return Invalid;
             }
 
+            if (!char.IsDigit(input[input.Length - 1]))
+            {
+                return Invalid;
+            }
+
             if (input.Contains('+') || input.Contains('-'))
             {
                 return CheckExponent(input);
