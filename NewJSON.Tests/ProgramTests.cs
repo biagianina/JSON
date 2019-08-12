@@ -154,5 +154,11 @@ namespace NewJSON.Tests
         {
             Assert.Equal("Valid", Program.JSONNumberValidator("-123"));
         }
+
+        [Fact]
+        public void NumberInpuContainsExponentShouldReturnValid()
+        {
+            Assert.Equal("Valid", Program.JSONNumberValidator("12.123e3"));
+        }
     }
 }
