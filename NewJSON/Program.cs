@@ -21,7 +21,9 @@ namespace NewJSON
                 return Invalid;
             }
 
-            if (!double.TryParse(input, out double result) || input.StartsWith('0') && input[1] != '.')
+            if (!double.TryParse(input, out double result)
+                || input.StartsWith('0') && input[1] != '.'
+                || input.EndsWith('.'))
             {
                 return Invalid;
             }

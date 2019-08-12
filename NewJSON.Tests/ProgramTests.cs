@@ -168,9 +168,15 @@ namespace NewJSON.Tests
         }
 
         [Fact]
-        public void NumberInputEndsnExponentsShouldReturnInvalid()
+        public void NumberInputEndsWithExponentsShouldReturnInvalid()
         {
             Assert.Equal("Invalid", Program.JSONNumberValidator("12.123E"));
+        }
+
+        [Fact]
+        public void NumberInputEndsWithPointShouldReturnInvalid()
+        {
+            Assert.Equal("Invalid", Program.JSONNumberValidator("12."));
         }
     }
 }
