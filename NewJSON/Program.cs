@@ -21,6 +21,14 @@ namespace NewJSON
                 return Invalid;
             }
 
+            foreach (char c in input)
+            {
+                if (!char.IsDigit(c))
+                {
+                    return Invalid;
+                }
+            }
+
             return Valid;
         }
 

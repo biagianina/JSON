@@ -202,5 +202,17 @@ namespace NewJSON.Tests
         {
             Assert.Equal("Invalid", Program.ManualNumberValidator(""));
         }
+
+        [Fact]
+        public void NumberInputShouldReturnValid()
+        {
+            Assert.Equal("Valid", Program.ManualNumberValidator("123"));
+        }
+
+        [Fact]
+        public void NumberInputContainsLettersShouldReturnInvalid()
+        {
+            Assert.Equal("Invalid", Program.ManualNumberValidator("123A"));
+        }
     }
 }
